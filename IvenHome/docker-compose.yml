@@ -1,0 +1,9 @@
+version: "3"
+services:
+  ivenhome:
+    container_name: ivenhome
+    restart: always
+    build: .
+    ports:
+      - "8080:8080"
+    tty: true

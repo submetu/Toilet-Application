@@ -1,0 +1,45 @@
+body{
+  background: #e2e1e0;
+}
+.App {
+  text-align: center;
+}
+.main-heading{
+  font-size: 40px;
+  font-weight: 300;
+}
+.sub-heading{
+  font-size: 20px;
+}
+.status-heading{
+  font-size: 15px;
+}
+.toilets {
+  display:  grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 50px;
+  grid-gap: 20px;
+}
+.toilet-container{
+  background: white;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.toilet-container > *{
+  margin: 20px auto!important;
+}
+.toilet-image-container{
+  width: 100px;
+  height: 100px;
+}
+.toilet-image{
+  width: 100%;
+  height: 100%;
+}
+
+
+@media screen and (max-width: 992px){
+  .toilets {
+    grid-template-columns: 1fr;
+  }
+}

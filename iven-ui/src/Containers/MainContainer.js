@@ -55,27 +55,33 @@ export default class MainContainer extends Component {
     generateToilets(){
         return this.state.toilets.map( toilet => {
             return <div className="toilet-container" key={toilet.id}>
-                    <Toilet toilet={toilet} statusColor={statusColors[toilet.status]}/>
-                    <div className="toilet-image-container">
-                        <ToiletImage source={ToiletImageModel[toilet.status]}/>
-                    </div>
-                    { this.props.isAdmin && 
-                      <StatusToggle 
-                        value={toilet.status} 
-                        toiletId={toilet.id} 
-                        options={Options} 
-                        onChange={this.onStatusToggle}
-                      />
-                    }
-                    { toilet.status === occupied && 
-                        <Timer 
-                            loadingText={"Just " + occupied + '...'}
-                            startTime={toilet.toggleTime}
+
+                        <Toilet toilet={toilet} statusColor={statusColors[toilet.status]}/>
+
+                        <div className="toilet-image-container">
+                            <ToiletImage source={ToiletImageModel[toilet.status]}/>
+                        </div>
+
+                        { this.props.isAdmin && 
+                        <StatusToggle 
+                            value={toilet.status} 
+                            toiletId={toilet.id} 
+                            options={Options} 
+                            onChange={this.onStatusToggle}
                         />
-                    }
+                        }
+
+                        { toilet.status === occupied && 
+                            <Timer 
+                                loadingText={"Just " + occupied + '...'}
+                                startTime={toilet.toggleTime}
+                            />
+                        }
+
                 </div>
       });
     }
+    
     onStatusToggle(propsPassed, event){
         var payLoad = {
             action: "toggle",

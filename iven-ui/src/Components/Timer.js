@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+
 import {occupied} from '../Models/constants';
+
 
 export default class Timer extends Component{
     constructor(){
@@ -35,7 +37,6 @@ export default class Timer extends Component{
 
     subtractTime(){
         let diff = Math.round( (new Date() - new Date(this.props.startTime)) /1000 ) * 1000;
-        
         if(diff > 0){
             this.setState({loading:false, time: this.msToTime(diff) });
         }else{

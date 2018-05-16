@@ -27,6 +27,6 @@ localhost:8080/admin
 ## Instructions for running backend tests:
  Open the backend project in Netbeans or eclipse and run the test file in the Test Package.
  
-##Instructions for running frontend tests:
+## Instructions for running frontend tests:
  Run *npm run test* in the frontend folder
  

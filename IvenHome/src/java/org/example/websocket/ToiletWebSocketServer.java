@@ -26,6 +26,7 @@ public class ToiletWebSocketServer {
     
      @OnOpen
         public void open(Session session) {
+            System.out.println(session);
             sessionHandler.addSession(session);
     }
 
@@ -46,21 +47,7 @@ public class ToiletWebSocketServer {
 
                 String action = jsonMessage.getString("action");
                 
-                if ("add".equals(action)) {
-//                    Toilet toilet = new Toilet();
-//                    toilet.setName(jsonMessage.getString("name"));
-//                    toilet.setDescription(jsonMessage.getString("description"));
-//                    toilet.setType(jsonMessage.getString("type"));
-//                    toilet.setStatus("Off");
-//                    sessionHandler.addToilet(toilet);
-                }
-
-                else if ("remove".equals(action)) {
-//                    int id = (int) jsonMessage.getInt("id");
-//                    sessionHandler.removeToilet(id);
-                }
-
-                else if ("toggle".equals(action)) {
+                if ("toggle".equals(action)) {
                     int id = (int) jsonMessage.getInt("id");
                     String newStatus = (String) jsonMessage.getString("newStatus");
                     sessionHandler.toggleToilet(id,newStatus);

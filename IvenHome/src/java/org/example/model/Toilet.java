@@ -9,7 +9,7 @@ public class Toilet {
     private String status;
     private String type;
     private String description;
-    private Date toggleTime; 
+    private String toggleTime; 
 
     public Toilet() {
     }
@@ -61,7 +61,7 @@ public class Toilet {
         this.description = description;
     }
     
-    public void setToggleTime(Date toggleTime){
+    public void setToggleTime(String toggleTime){
         this.toggleTime = toggleTime;
     }
     

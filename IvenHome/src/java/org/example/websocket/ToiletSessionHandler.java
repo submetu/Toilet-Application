@@ -2,6 +2,8 @@
 package org.example.websocket;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +13,7 @@ import javax.json.JsonObject;
 import javax.websocket.Session;
 import org.example.model.Toilet;
 import java.util.Date;
+import java.util.TimeZone;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -57,60 +60,50 @@ public class ToiletSessionHandler {
         
     }
     
-    private JsonArray getAllToilets(){
+    public JsonArray getAllToilets(){
          JsonArrayBuilder array = Json.createArrayBuilder();
 
         for (Toilet toilet : toilets) {
-           JsonObject a = createAddMessage(toilet);
-           array.add(a);
+           JsonObject toiletJson = createMessage(toilet);
+           array.add(toiletJson);
         }
         JsonArray builtArray = array.build();
         return builtArray;
     }
+    
     
     public void addSession(Session session) {
         sessions.add(session);
         JsonArray allToilets = getAllToilets();
         sendToSession(session, allToilets);
     }
+     
 
     public void removeSession(Session session) {
         sessions.remove(session);
     }
-    
-
-    public void addToilet(Toilet toilet) {
-//        toilet.setId(deviceId);
-//        toilets.add(toilet);
-//        deviceId++;
-//        JsonObject addMessage = createAddMessage(toilet);
-//        sendToAllConnectedSessions(addMessage);
-    }
-
-    public void removeToilet(int id) {
-//        Toilet toilet = getToiletById(id);
-//        if (toilet != null) {
-//            toilets.remove(toilet);
-//            JsonProvider provider = JsonProvider.provider();
-//            JsonObject removeMessage = provider.createObjectBuilder()
-//                    .add("action", "remove")
-//                    .add("id", id)
-//                    .build();
-//            sendToAllConnectedSessions(removeMessage);
-//        }
-    }
+  
 
     public void toggleToilet(int id, String newStatus) {
         Toilet toilet = getToiletById(id);
         if (toilet != null) {
             toilet.setStatus(newStatus);
-            toilet.setToggleTime( new Date());
+            toilet.setToggleTime( getCurrentFormattedDate());
             JsonArray updatedMessage = getAllToilets();
             sendToAllConnectedSessions(updatedMessage);
         }
     }
+    
+    public String getCurrentFormattedDate(){
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"); 
+        df.setTimeZone(tz);
+        String nowAsISO = df.format(new Date());
+        
+        return nowAsISO;
+    }
 
-    private Toilet getToiletById(int id) {
+    public Toilet getToiletById(int id) {
         for (Toilet toilet : toilets) {
             if (toilet.getId() == id) {
                 return toilet;
@@ -119,7 +112,7 @@ public class ToiletSessionHandler {
         return null;
     }
 
-    private JsonObject createAddMessage(Toilet toilet) {
+    public JsonObject createMessage(Toilet toilet) {
         JsonObject addMessage = Json.createObjectBuilder()
                 .add("action", "add")
                 .add("id", toilet.getId())

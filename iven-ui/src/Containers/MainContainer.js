@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import config from '../config';
 import Toilet from '../Components/Toilet';
@@ -90,4 +91,8 @@ export default class MainContainer extends Component {
         };
         this.socket.send(JSON.stringify(payLoad));
     }
+}
+
+MainContainer.propTypes = {
+    isAdmin: PropTypes.bool.isRequired
 }

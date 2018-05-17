@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 import {occupied} from '../Models/constants';
 
@@ -58,6 +59,10 @@ export default class Timer extends Component{
       }
 }
 
-Timer.defaultProps = {
+Timer.propTypes= {
     loadingText: 'Loading ...'
+}
+Timer.PropTypes = {
+    loadingText: PropTypes.string,
+    startTime: PropTypes.string.isRequired
 }

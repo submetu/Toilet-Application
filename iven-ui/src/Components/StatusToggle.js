@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const StatusToggle = (props) => {
     return <div id="statusToggle">
@@ -10,5 +11,10 @@ const StatusToggle = (props) => {
     </div>
 }
 
+StatusToggle.propTypes = {
+    onChange: PropTypes.func,
+    value: PropTypes.string,
+    options: PropTypes.array.isRequired
+  };
 
 export default StatusToggle;

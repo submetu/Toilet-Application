@@ -34,5 +34,5 @@ There are two pages in this project
  Open the backend project in Netbeans or eclipse and run the test file in the Test Package.
  
 ## Instructions for running frontend tests:
- Run `npm run test` in the frontend folder
+ Run `yarn test` in the frontend folder
  

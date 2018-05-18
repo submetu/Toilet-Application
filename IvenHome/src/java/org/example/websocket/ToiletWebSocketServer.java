@@ -26,7 +26,6 @@ public class ToiletWebSocketServer {
     
      @OnOpen
         public void open(Session session) {
-            System.out.println(session);
             sessionHandler.addSession(session);
     }
 

@@ -16,8 +16,6 @@ import { occupied } from './Models/constants';
 
 
 global.WebSocket = WebSocket;
-global.this = {}
-global.this.socket = WebSocket;
 
  describe('<AdminContainer />', () => {
    const wrapper = shallow(<AdminContainer />);
